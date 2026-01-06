@@ -1,76 +1,51 @@
-public class Patient {
-
-
-    private String name;
-    private int age;
+public class Patient extends Person {
     private String problem;
-    private String phoneNumber;
+    private String phone;
 
-
-    public Patient() {
-    }
-
-
-    public Patient(String name, int age, String problem, String phoneNumber) {
-        this.name = name;
-        this.age = age;
-        this.problem = problem;
-        this.phoneNumber = phoneNumber;
-    }
-
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public String getProblem() {
-        return problem;
+    public Patient(String name, int age, String problem, String phone) {
+        super(name, age);
+        setProblem(problem);
+        setPhone(phone);
     }
 
     public void setProblem(String problem) {
-        this.problem = problem;
+        if (problem == null || problem.isEmpty()) {
+            this.problem = "Not specified";
+        } else {
+            this.problem = problem;
+        }
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setPhone(String phone) {
+        if (phone == null || phone.length() < 5) {
+            this.phone = "Unknown";
+        } else {
+            this.phone = phone;
+        }
     }
-
 
     public String getAgeCategory() {
-        if (age >= 3 && age < 18) return "Child";
-        else if (age <= 60) return "Adult";
-        else return "Senior";
-    }
-
-
-    public boolean isAdult() {
-        return age >= 18;
+        if (age < 18) return "Child";
+        if (age <= 60) return "Adult";
+        return "Senior";
     }
 
 
     @Override
+    public String getRole() {
+        return "Patient";
+    }
+
+    @Override
     public String toString() {
-        return "Patient{name='" + name + "', age=" + age +
-                ", category='" + getAgeCategory() +
-                "', problem='" + problem +
-                "', phone='" + phoneNumber + "'}";
+        return super.toString() +
+                ", Role: Patient" +
+                ", Problem: " + problem +
+                ", Category: " + getAgeCategory();
     }
 }
+
+
 
 
