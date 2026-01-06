@@ -1,43 +1,34 @@
 import java.util.Scanner;
 
+
 public class Basic {
     public static void main(String[] args) {
 
-        Hospital hospital = new Hospital();
+        Hospital hospital = new Hospital("Daniyar Zhubanysh Dental Clinic");
         Scanner scanner = new Scanner(System.in);
 
+        hospital.addPerson(new Doctor("Erkassiet", 30, "Dentistry", 6));
+        hospital.addPerson(new Doctor("Nurai", 28, "Dentistry", 3));
+        hospital.addPerson(new Doctor("Nurbolsyn", 35, "Dentistry", 4));
+        hospital.addPerson(new Doctor("Magzhan", 40, "Dentistry", 8));
+        hospital.addPerson(new Doctor("Ademi", 29, "Dentistry", 2));
 
-        hospital.addDoctor(new Doctor("Erkassiet", "Dentistry", "Child", "Male", 6));
-        hospital.addDoctor(new Doctor("Nurbolsyn", "Dentistry", "Adult", "Male", 4));
-        hospital.addDoctor(new Doctor("Magzhan", "Dentistry", "Senior", "Male", 8));
-        hospital.addDoctor(new Doctor("Nurai", "Dentistry", "Child", "Female", 5));
-        hospital.addDoctor(new Doctor("Ademi", "Dentistry", "Adult", "Female", 3));
 
-        boolean running = true;
+        boolean run = true;
 
-        while (running) {
-
-            System.out.println("\n=== " + hospital.getHospitalName() + " ===");
-            System.out.println("1. Show doctors");
-            System.out.println("2. Add patient");
-            System.out.println("3. Book appointment");
+        while (run) {
+            System.out.println("\n1. Add patient");
+            System.out.println("2. Show all people");
+            System.out.println("3. Show only doctors");
             System.out.println("0. Exit");
-            System.out.print("Choose option: ");
+            System.out.print("Choose: ");
 
             int choice = scanner.nextInt();
             scanner.nextLine();
 
             switch (choice) {
-
                 case 1:
-                    System.out.println("\n--- Doctors ---");
-                    for (Doctor d : hospital.getDoctors()) {
-                        System.out.println(d);
-                    }
-                    break;
-
-                case 2:
-                    System.out.print("Patient name: ");
+                    System.out.print("Name: ");
                     String name = scanner.nextLine();
 
                     System.out.print("Age: ");
@@ -47,41 +38,29 @@ public class Basic {
                     System.out.print("Problem: ");
                     String problem = scanner.nextLine();
 
-                    System.out.print("Phone number: ");
+                    System.out.print("Phone: ");
                     String phone = scanner.nextLine();
 
-                    Patient patient = new Patient(name, age, problem, phone);
-                    hospital.addPatient(patient);
+                    hospital.addPerson(new Patient(name, age, problem, phone));
+                    System.out.println("Patient added!");
+                    break;
 
-                    System.out.println("Patient added successfully!");
+                case 2:
+                    hospital.showAllPeople();
                     break;
 
                 case 3:
-                    if (hospital.getTotalPatients() == 0) {
-                        System.out.println("No patients yet. Add patient first.");
-                        break;
-                    }
-
-                    Patient lastPatient = hospital.getLastPatient();
-                    String category = lastPatient.getAgeCategory();
-
-                    System.out.println("\nAvailable doctors for " + category + ":");
-                    hospital.showDoctorsForAgeGroup(category);
-
-                    System.out.println("Appointment booked successfully!");
+                    hospital.showOnlyDoctors();
                     break;
 
                 case 0:
-                    running = false;
-                    System.out.println("Goodbye!");
+                    run = false;
                     break;
-
-                default:
-                    System.out.println("Invalid option. Try again.");
             }
         }
     }
 }
+
 
 
 
