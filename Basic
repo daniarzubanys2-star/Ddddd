@@ -1,9 +1,7 @@
 import java.util.Scanner;
 
-
 public class Basic {
     public static void main(String[] args) {
-
         Hospital hospital = new Hospital("Daniyar Zhubanysh Dental Clinic");
         Scanner scanner = new Scanner(System.in);
 
@@ -13,53 +11,60 @@ public class Basic {
         hospital.addPerson(new Doctor("Magzhan", 40, "Dentistry", 8));
         hospital.addPerson(new Doctor("Ademi", 29, "Dentistry", 2));
 
-
         boolean run = true;
 
         while (run) {
-            System.out.println("\n1. Add patient");
-            System.out.println("2. Show all people");
-            System.out.println("3. Show only doctors");
-            System.out.println("0. Exit");
-            System.out.print("Choose: ");
+            try {
+                System.out.println("\n1. Add patient");
+                System.out.println("2. Show all people");
+                System.out.println("3. Show only doctors");
+                System.out.println("0. Exit");
+                System.out.print("Choose: ");
 
-            int choice = scanner.nextInt();
-            scanner.nextLine();
+                int choice = scanner.nextInt();
+                scanner.nextLine();
 
-            switch (choice) {
-                case 1:
-                    System.out.print("Name: ");
-                    String name = scanner.nextLine();
+                switch (choice) {
+                    case 1:
+                        System.out.print("Name: ");
+                        String name = scanner.nextLine();
 
-                    System.out.print("Age: ");
-                    int age = scanner.nextInt();
-                    scanner.nextLine();
+                        System.out.print("Age: ");
+                        int age = scanner.nextInt();
+                        scanner.nextLine();
 
-                    System.out.print("Problem: ");
-                    String problem = scanner.nextLine();
+                        System.out.print("Problem: ");
+                        String problem = scanner.nextLine();
 
-                    System.out.print("Phone: ");
-                    String phone = scanner.nextLine();
+                        System.out.print("Phone: ");
+                        String phone = scanner.nextLine();
 
-                    hospital.addPerson(new Patient(name, age, problem, phone));
-                    System.out.println("Patient added!");
-                    break;
+                        hospital.addPerson(new Patient(name, age, problem, phone));
+                        System.out.println("Patient added!");
+                        break;
 
-                case 2:
-                    hospital.showAllPeople();
-                    break;
+                    case 2:
+                        hospital.showAllPeople();
+                        break;
 
-                case 3:
-                    hospital.showOnlyDoctors();
-                    break;
+                    case 3:
+                        hospital.showOnlyDoctors();
+                        break;
 
-                case 0:
-                    run = false;
-                    break;
+                    case 0:
+                        run = false;
+                        break;
+
+                    default:
+                        System.out.println("Invalid choice");
+                }
+            } catch (IllegalArgumentException e) {
+                System.out.println("Error: " + e.getMessage());
             }
         }
     }
 }
+
 
 
 
