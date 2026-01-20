@@ -1,4 +1,5 @@
 public abstract class Person {
+
     protected String name;
     protected int age;
 
@@ -7,32 +8,19 @@ public abstract class Person {
         setAge(age);
     }
 
-
     public void setName(String name) {
         if (name == null || name.isEmpty()) {
-            this.name = "Unknown";
-        } else {
-            this.name = name;
+            throw new IllegalArgumentException("Name is empty");
         }
+        this.name = name;
     }
 
     public void setAge(int age) {
         if (age < 0) {
-            this.age = 0;
-        } else {
-            this.age = age;
+            throw new IllegalArgumentException("Age is negative");
         }
+        this.age = age;
     }
-
-
-    public String getName() {
-        return name;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
 
     public abstract String getRole();
 
