@@ -9,20 +9,17 @@ public class Patient extends Person {
     }
 
     public void setProblem(String problem) {
-        if (problem == null || problem.isEmpty()) {
-            this.problem = "Not specified";
-        } else {
-            this.problem = problem;
+        if (problem == null || problem.trim().isEmpty()) {
+            throw new IllegalArgumentException("Problem cannot be empty");
         }
+        this.problem = problem;
     }
-
 
     public void setPhone(String phone) {
         if (phone == null || phone.length() < 5) {
-            this.phone = "Unknown";
-        } else {
-            this.phone = phone;
+            throw new IllegalArgumentException("Invalid phone number");
         }
+        this.phone = phone;
     }
 
     public String getAgeCategory() {
@@ -30,7 +27,6 @@ public class Patient extends Person {
         if (age <= 60) return "Adult";
         return "Senior";
     }
-
 
     @Override
     public String getRole() {
@@ -45,6 +41,9 @@ public class Patient extends Person {
                 ", Category: " + getAgeCategory();
     }
 }
+
+
+
 
 
 
