@@ -1,4 +1,5 @@
 public class Doctor extends Person {
+
     private String specialization;
     private int experienceYears;
 
@@ -10,25 +11,17 @@ public class Doctor extends Person {
 
     public void setSpecialization(String specialization) {
         if (specialization == null || specialization.isEmpty()) {
-            this.specialization = "General";
-        } else {
-            this.specialization = specialization;
+            throw new IllegalArgumentException("Specialization is empty");
         }
+        this.specialization = specialization;
     }
-
 
     public void setExperienceYears(int experienceYears) {
         if (experienceYears < 0) {
-            this.experienceYears = 0;
-        } else {
-            this.experienceYears = experienceYears;
+            throw new IllegalArgumentException("Experience is negative");
         }
+        this.experienceYears = experienceYears;
     }
-
-    public boolean isExperienced() {
-        return experienceYears >= 5;
-    }
-
 
     @Override
     public String getRole() {
@@ -40,9 +33,11 @@ public class Doctor extends Person {
         return super.toString() +
                 ", Role: Doctor" +
                 ", Specialization: " + specialization +
-                ", Experience: " + experienceYears + " years";
+                ", Experience: " + experienceYears;
     }
 }
+
+
 
 
 
