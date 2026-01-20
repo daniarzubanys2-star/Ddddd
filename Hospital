@@ -1,16 +1,22 @@
 import java.util.ArrayList;
 
 public class Hospital {
+
     private String name;
     private ArrayList<Person> people;
 
     public Hospital(String name) {
+        if (name == null || name.isEmpty()) {
+            throw new IllegalArgumentException("Hospital name is empty");
+        }
         this.name = name;
-        people = new ArrayList<>();
+        this.people = new ArrayList<>();
     }
 
-
     public void addPerson(Person person) {
+        if (person == null) {
+            throw new IllegalArgumentException("Person is null");
+        }
         people.add(person);
     }
 
@@ -23,11 +29,12 @@ public class Hospital {
     public void showOnlyDoctors() {
         for (Person p : people) {
             if (p instanceof Doctor) {
-                Doctor d = (Doctor) p;
-                System.out.println(d);
+                System.out.println(p);
             }
         }
     }
 }
+
+
 
 
